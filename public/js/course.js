@@ -1,3 +1,4 @@
+let currentVideoJSPlayer = null;
 document.addEventListener('DOMContentLoaded', () => {
   const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
   const headerEl = document.getElementById("header");
@@ -15,6 +16,9 @@ function setCourseContentContainer(containerHeight) {
   courseContentContainer.style.height = `${targetHeight}px`;
 }
 function clearVidContent() {
+  if (currentVideoJSPlayer) {
+    currentVideoJSPlayer.dispose();
+  }
   document.getElementById("video-container").innerHTML = ""
 }
 function setVideoMenuListeners() {
@@ -55,11 +59,12 @@ function injectVideoUrl(videoUrl) {
   b.setAttribute("src", videoUrl)
   a.appendChild(b)
   vidContainer.appendChild(a)
-  videojs('active-video', {
+  currentVideoJSPlayer = videojs('active-video', {
     controls: true,
     autoplay: false,
     preload: 'auto',
     aspectRatio: '16:9',
   })
+  console.log("down here", videojs.players)
 }
 
