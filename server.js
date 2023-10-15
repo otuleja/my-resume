@@ -2,6 +2,8 @@ const express = require('express')
 const path = require('path')
 const app = express()
 require('dotenv').config()
+const S3 = require('aws-sdk/clients/s3');
+
 const apiRoutes = require('./routes/api')
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
@@ -30,6 +32,43 @@ app.get("/courses", async function (req, res) {
 })
 
 
+app.get("/course/:id", async function (req, res) {
+  console.log("req.params", req.params)
+  const s3 = new S3({
+    accessKeyId: process.env.ACCESS_KEY_ID,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY
+  });
+
+  Course.findById(req.params.id).then(function (course) {
+    course.videos = course.videos || []
+    course.videos = course.videos.sort((a, b) => a.order - b.order)
+    res.render('course', { course });
+  })
+
+  // const a = (props = {}) => {
+  //   //gets list of objects in given bucket
+  //   return s3.listObjects(props, function (err, data) {
+  //     if (err) console.log("err", err, err.stack); // an error occurred
+  //     if (data.Contents && data.Contents.length) {
+  //       data.Contents.forEach((o) => {
+  //         const key = o.Key;
+  //         console.log("key", key)
+  //       });
+
+  //     } else {
+  //       return null
+  //     }
+  //   });
+  // };
+  // const result = await a({ Bucket: "react-class-videos" });
+  // console.log("result", result)
+
+})
+
+// app.get("/video/:courseid/:videoid", async function (req, res) {
+
+//   res.render("video")
+// })
 
 
 // app.get("*", function (req, res) {

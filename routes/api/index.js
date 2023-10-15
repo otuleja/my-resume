@@ -8,19 +8,19 @@ router.get("/health", async (req, res) => {
   res.send(JSON.stringify({ status: "ok" }))
 })
 
-router.get("/getSignedUrl/:fileName", async (req, res) => {
+router.get("/getSignedUrl/:bucketName/:key", async (req, res) => {
   const s3 = new S3({
     accessKeyId: process.env.ACCESS_KEY_ID,
     secretAccessKey: process.env.SECRET_ACCESS_KEY
   });
-  const Key = `Lesson_3.mp4`;
-  let params = {
-    Bucket: 'react-class-videos',
+  const Key = req.params.key;
+  let config = {
+    Bucket: req.params.bucketName,
     Key,
   };
   const a = () => {
     return s3.getSignedUrlPromise('getObject', {
-      ...params,
+      ...config,
       Expires: 600,
     });
   };
