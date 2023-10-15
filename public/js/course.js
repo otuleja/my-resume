@@ -1,36 +1,56 @@
 let currentVideoJSPlayer = null;
-document.addEventListener('DOMContentLoaded', () => {
-  const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
-  const headerEl = document.getElementById("header");
-  const containerHeight = vh - headerEl.clientHeight;
-  const courseContainer = document.getElementById("course-container");
+
+let headerEl = null;
+let courseContainer = null;
+let nameRowEl = null;
+let courseContentContainer = null;
+let videoContainer = null;
+let videoMenuElements = null;
+let vidHelperText = null;
+let loadingElement = null
+
+let viewHeight = 0;
+
+function init() {
+  headerEl = document.getElementById("header");
+  courseContainer = document.getElementById("course-container");
+  nameRowEl = document.getElementById("course-name-row")
+  courseContentContainer = document.getElementById("course-content-container");
+  videoContainer = document.getElementById("video-container");
+  videoMenuElements = document.querySelectorAll(".styled-video-menu");
+  vidHelperText = document.getElementById("vid-helper-text");
+  loadingElement = document.getElementById("loading")
+  viewHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+
+  const containerHeight = viewHeight - headerEl.clientHeight;
   courseContainer.style.height = `${containerHeight}px`;
+
   setCourseContentContainer(containerHeight)
   setVideoMenuListeners()
-})
+}
+
 
 function setCourseContentContainer(containerHeight) {
-  const nameRowEl = document.getElementById("course-name-row");
   const targetHeight = containerHeight - nameRowEl.clientHeight;
-  const courseContentContainer = document.getElementById("course-content-container");
   courseContentContainer.style.height = `${targetHeight}px`;
 }
+
 function clearVidContent() {
   if (currentVideoJSPlayer) {
     currentVideoJSPlayer.dispose();
   }
-  document.getElementById("video-container").innerHTML = ""
+  videoContainer.innerHTML = ""
 }
 function setVideoMenuListeners() {
-  const elements = document.querySelectorAll(".styled-video-menu");
-  elements.forEach(element => {
+
+  videoMenuElements.forEach(element => {
     element.addEventListener("click", (e) => {
       clearVidContent()
       const id = e.target.id;
       const vidKey = id.split("video-menu-")[1];
       const bucket = e.target.getAttribute("video-bucket");
-      document.getElementById("vid-helper-text").classList.add("hide")
-      document.getElementById("loading").classList.remove("hide")
+      vidHelperText.classList.add("hide")
+      loadingElement.classList.remove("hide")
       getSignedVideoUrl(bucket, vidKey)
     })
   })
@@ -44,27 +64,29 @@ async function getSignedVideoUrl(bucket, key) {
   }).catch(err => {
     console.log("err", err)
   }).finally(() => {
-    document.getElementById("loading").classList.add("hide")
+    loading.classList.add("hide")
   })
 }
 
 function injectVideoUrl(videoUrl) {
-  const vidContainer = document.getElementById("video-container");
-  vidContainer.classList.remove("hide")
-  const a = document.createElement("video")
-  a.setAttribute("id", "active-video")
-  a.classList.add("video-js")
+  videoContainer.classList.remove("hide")
+  const videoElement = document.createElement("video")
+  videoElement.setAttribute("id", "active-video")
+  videoElement.classList.add("video-js")
 
-  const b = document.createElement("source")
-  b.setAttribute("src", videoUrl)
-  a.appendChild(b)
-  vidContainer.appendChild(a)
+  const source = document.createElement("source")
+  source.setAttribute("src", videoUrl)
+  videoElement.appendChild(source)
+  videoContainer.appendChild(videoElement)
+
   currentVideoJSPlayer = videojs('active-video', {
     controls: true,
     autoplay: false,
     preload: 'auto',
     aspectRatio: '16:9',
   })
-  console.log("down here", videojs.players)
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  init()
+})
