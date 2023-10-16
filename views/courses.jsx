@@ -9,7 +9,7 @@ function Courses(props) {
           {props.courses.map(course => {
             return (
               <div class="col s10 offset-s1 m8 offset-m2 l6 offset-l3" >
-                <div class="card">
+                <div class="card z-depth-5">
                   <div class="card-image">
                     <img src="images/react-1.png" />
                     <span class="card-title">{course.name}</span>

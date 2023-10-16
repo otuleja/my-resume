@@ -6,6 +6,11 @@ body {
   margin-bottom: 0 !important;
 }
 
+
+.mt-2 {
+  margin-top: 2rem;
+}
+
 .mt-4 {
   margin-top: 4rem
 }
@@ -27,11 +32,47 @@ body {
   width: 100%
 }
 
+.menu-container .styled-video-menu {
+  border: 1px solid #a3a3a3;
+  border-bottom: none;
+}
+
+.menu-container>div:last-child>.styled-video-menu {
+  border-bottom: 1px solid #a3a3a3;
+}
+
 .styled-video-menu {
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
-  border: 1px solid #a3a3a3;
   cursor: pointer;
+  position: relative;
+  z-index: 5;
+}
+
+.styled-video-menu.active-video-menu {
+  background-color: #d3d3d3;
+}
+
+.progress-check i {
+  color: #9c27b0;
+}
+
+.progress {
+  margin: 0.25rem 0rem;
+  background-color: #e1bee7;
+}
+
+.progress .determinate {
+  background-color: #9c27b0;
+}
+
+.progress-check {
+  display: flex;
+  min-width: 0.5rem;
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 #video-container {
@@ -43,5 +84,13 @@ body {
 
 #active-video {
   width: 80% !important;
-  /* height: max-content; */
+  border-radius: 15px;
+}
+
+.vjs-control-bar {
+  border-radius: 0 0 15px 15px;
+}
+
+.spinner-purple-only {
+  border-color: #9c27b0;
 }

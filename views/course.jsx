@@ -20,12 +20,26 @@ function Course({ course }) {
                   <h6 class="center-align">Videos</h6>
                 </div>
               </div>
-              <div class="row mb-0">
+              <div class="row mb-0 menu-container">
                 {course.videos.map(video => {
                   return (
                     <div class="col s12">
-                      <div class="styled-video-menu full width center-align" id={`video-menu-${video.key}`} video-bucket={video.bucket}>
-                        {video.name}
+                      <div class="styled-video-menu full-width center-align" id={`video-menu-${video.key}`} video-bucket={video.bucket}>
+                        <div>
+                          <span class="progress-check hide" id={`completed-check-${video.key}`}>
+                            <i class="material-icons">check_circle</i>
+                          </span>
+                          <span>
+                            {video.name}
+                          </span>
+                        </div>
+                        <div class="row mb-0">
+                          <div class="col s6 offset-s3">
+                            <div class="progress">
+                              <div class="determinate" id={`progress-bar-${video.key}`} style={{ width: "0%" }}></div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   )
@@ -33,15 +47,23 @@ function Course({ course }) {
               </div>
             </div>
             <div class="col s9 full-height" >
-              <div class="" id="vid-helper-text">
-                <p>
+              {/* <div class="mt-2" id="vid-helper-text">
+                <h6 class="grey-text text-darken-1 center-align">
                   Select a video from the menu on the left to start watching.
-                </p>
-              </div>
-              <div class="hide" id="loading">
-                <p>
-                  Loading video...
-                </p>
+                </h6>
+              </div> */}
+              <div class="center-align mt-2 hide" id="loading">
+                <div class="preloader-wrapper active">
+                  <div class="spinner-layer spinner-purple-only">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div><div class="gap-patch">
+                      <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div id="video-container" class="hide full-height">
               </div>
