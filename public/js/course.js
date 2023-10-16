@@ -153,7 +153,7 @@ function injectVideoUrl(videoUrl, isInitialLoad = false) {
     aspectRatio: '16:9',
   })
   if (progressObject[courseID]?.[vidKey]?.progress) {
-    currentVideoJSPlayer.currentTime(progressObject[courseID][vidKey].progress)
+    currentVideoJSPlayer.currentTime(progressObject[courseID][vidKey].isCompleted ? 0 : progressObject[courseID][vidKey].progress)
   }
   checkVidStatus()
   myCoolInterval = setInterval(checkVidStatus, 5000)
