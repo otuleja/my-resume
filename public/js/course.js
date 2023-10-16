@@ -14,6 +14,7 @@ let vidKey = "";
 let courseID = "";
 
 let myCoolInterval = null;
+const finishThreshold = .98
 let progressObject = {}
 
 
@@ -52,7 +53,7 @@ function checkVidStatus() {
       progressObject[courseID][vidKey] = progressObject[courseID][vidKey] || {}
       progressObject[courseID][vidKey].progress = currentTime
       progressObject[courseID][vidKey].duration = duration
-      if (currentTime / duration > .98) {
+      if (currentTime / duration > finsihThreshold) {
         progressObject[courseID][vidKey].isCompleted = true
         insertCompletedCheck(vidKey)
       }
@@ -153,7 +154,9 @@ function injectVideoUrl(videoUrl, isInitialLoad = false) {
     aspectRatio: '16:9',
   })
   if (progressObject[courseID]?.[vidKey]?.progress) {
-    currentVideoJSPlayer.currentTime(progressObject[courseID][vidKey].isCompleted ? 0 : progressObject[courseID][vidKey].progress)
+    // currentVideoJSPlayer.currentTime(progressObject[courseID][vidKey].isCompleted ? 0 : progressObject[courseID][vidKey].progress)
+    currentVideoJSPlayer.currentTime(progressObject[courseID][vidKey].progress)
+
   }
   checkVidStatus()
   myCoolInterval = setInterval(checkVidStatus, 5000)
