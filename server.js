@@ -76,7 +76,9 @@ app.get("/course/:id", async function (req, res) {
 // })
 
 app.listen(port, async () => {
-  console.log(`Server running on port ${port}` + (process.env.MONGO_URI || MONGO_URI))
+  console.log(`Server running on port ${port}` + (process.env.MONGO_URI))
+  console.log("1", MONGO_URI)
+  console.log("2", $MONOGO_URI)
   mongoose.set('strictQuery', true)
   mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
