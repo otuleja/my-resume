@@ -15,9 +15,14 @@ let courseID = "";
 
 let myCoolInterval = null;
 const finishThreshold = .98
+const beginningThreshold = .05
 let progressObject = {}
+let breakpointObject = {
+  breakpointVideoKey: null,
+  breakpoints: []
+}
 
-
+//MAKE breakpoints clickable to take you to that part of video
 function insertCompletedCheck(vidKey) {
   const completedCheckElement = document.getElementById(`completed-check-${vidKey}`)
   completedCheckElement.classList.remove("hide")
@@ -43,9 +48,27 @@ function addProgressToVideos() {
 
   }
 }
+
+function processBreakpoints(currentTime) {
+  if (vidKey === breakpointObject.breakpointVideoKey && breakpointObject.breakpoints?.length) {
+    breakpointObject.breakpoints.forEach((breakpoint) => {
+      const currentElement = document.getElementById(breakpoint.id)
+      currentElement.classList.remove("breakpoint-active")
+      currentElement.classList.remove("breakpoint-past")
+      currentElement.classList.remove("breakpoint-future")
+      if (breakpoint.start < currentTime && currentTime < breakpoint.end) {
+        currentElement.classList.add("breakpoint-active")
+      } else if (breakpoint.start > currentTime) {
+        currentElement.classList.add("breakpoint-future")
+      } else {
+        currentElement.classList.add("breakpoint-past")
+      }
+
+    })
+  }
+}
 function checkVidStatus() {
   if (currentVideoJSPlayer) {
-    //expand current video with transition and description of learning points - bold the current part/finsihed sections
     const currentTime = currentVideoJSPlayer.currentTime()
     const duration = currentVideoJSPlayer.duration()
     if (currentTime > 0) {
@@ -53,13 +76,14 @@ function checkVidStatus() {
       progressObject[courseID][vidKey] = progressObject[courseID][vidKey] || {}
       progressObject[courseID][vidKey].progress = currentTime
       progressObject[courseID][vidKey].duration = duration
-      if (currentTime / duration > finsihThreshold) {
+      if ((currentTime / duration) > finishThreshold) {
         progressObject[courseID][vidKey].isCompleted = true
         insertCompletedCheck(vidKey)
       }
       localStorage.setItem("progressObject", JSON.stringify(progressObject))
     }
     addProgressToVideos()
+    processBreakpoints(currentTime)
   }
 }
 function init() {
@@ -80,7 +104,7 @@ function init() {
   courseContainer.style.height = `${containerHeight}px`;
 
   //default to first video being active by simulating click
-  handleMenuClick({ currentTarget: videoMenuElements[0] })
+  handleMenuClick({ currentTarget: videoMenuElements[0] }, true)
   setCourseContentContainer(containerHeight)
   setVideoMenuListeners()
   addProgressToVideos()
@@ -109,21 +133,71 @@ function setVideoMenuListeners() {
     })
   })
 }
+function clearBreakpointView() {
+  const elements = document.querySelectorAll(".breakpoint-wrapper-class") || []
+  for (let i = 0; i < elements.length; i++) {
+    const currentElement = elements[i]
+    currentElement.classList.add("hide")
+    const a = currentElement.getAttribute("style")
+    currentElement.style.height = "0px"
 
+    const innerElement = currentElement.querySelector(".breakpoint-wrapper-inner")
+    if (innerElement) {
+      innerElement.classList.add("zero-height")
+    }
+  }
+  const selectedBreakpointInnerWrapper = document.getElementById(`breakpoint_wrapper-${vidKey}`)
+  console.log("selectedBreakpointInnerWrapper", selectedBreakpointInnerWrapper)
+  if (selectedBreakpointInnerWrapper) {
+    selectedBreakpointInnerWrapper.classList.remove("zero-height")
+    selectedBreakpointInnerWrapper.parentElement.classList.remove("hide")
+    const targetHeight = selectedBreakpointInnerWrapper.scrollHeight;
+    selectedBreakpointInnerWrapper.parentElement.style.height = `${targetHeight}px`
+    setTimeout(() => {
+      console.log("in set timeout")
+      selectedBreakpointInnerWrapper.parentElement.style.height = `fit-content`
+    }, 510)
+  }
+}
 function handleMenuClick(e, isInitialLoad = false) {
+  breakpointObject = {
+    breakpointVideoKey: null,
+    breakpoints: []
+  }
   videoMenuElements.forEach(element => {
     element.classList.remove("active-video-menu")
   })
   clearVidContent()
+
   e.currentTarget.classList.add("active-video-menu")
   const id = e.currentTarget.id;
   vidKey = id.split("video-menu-")[1];
   const bucket = e.currentTarget.getAttribute("video-bucket");
-  // vidHelperText.classList.add("hide")
   loadingElement.classList.remove("hide")
+
+  clearBreakpointView()
   getSignedVideoUrl(bucket, vidKey, isInitialLoad)
+  initializeBreakpoints(vidKey)
 }
 
+
+function initializeBreakpoints(vidKey) {
+  const currentVideoBreaktpointWrapper = document.getElementById(`breakpoint_wrapper-${vidKey}`)
+  let updatedBreakpoints = []
+  if (currentVideoBreaktpointWrapper) {
+    for (let i = 0; i < currentVideoBreaktpointWrapper.children.length; i++) {
+      const currentElement = currentVideoBreaktpointWrapper.children[i]
+      const start = parseInt(currentElement.dataset.timestamp)
+      const end = currentVideoBreaktpointWrapper.children[i + 1] ? parseInt(currentVideoBreaktpointWrapper.children[i + 1].dataset.timestamp) : Infinity
+      const id = currentElement.id
+      updatedBreakpoints.push({ timestamp: currentElement.dataset.timestamp, start, end, id })
+    }
+  }
+  breakpointObject = {
+    breakpointVideoKey: vidKey,
+    breakpoints: updatedBreakpoints
+  }
+}
 async function getSignedVideoUrl(bucket, key, isInitialLoad = false) {
   fetch(`/api/getSignedUrl/${bucket}/${key}`).then(async res => {
     res = await res.json()
@@ -154,9 +228,9 @@ function injectVideoUrl(videoUrl, isInitialLoad = false) {
     aspectRatio: '16:9',
   })
   if (progressObject[courseID]?.[vidKey]?.progress) {
-    // currentVideoJSPlayer.currentTime(progressObject[courseID][vidKey].isCompleted ? 0 : progressObject[courseID][vidKey].progress)
-    currentVideoJSPlayer.currentTime(progressObject[courseID][vidKey].progress)
-
+    if ((progressObject[courseID][vidKey].progress / progressObject[courseID][vidKey].duration) > beginningThreshold) {
+      currentVideoJSPlayer.currentTime(progressObject[courseID][vidKey].progress)
+    }
   }
   checkVidStatus()
   myCoolInterval = setInterval(checkVidStatus, 5000)

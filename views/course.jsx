@@ -21,25 +21,42 @@ function Course({ course }) {
                 </div>
               </div>
               <div class="row mb-0 menu-container">
-                {course.videos.map(video => {
+                {course.videos.map((video, index) => {
                   return (
-                    <div class="col s12">
-                      <div class="styled-video-menu full-width center-align" id={`video-menu-${video.key}`} video-bucket={video.bucket}>
-                        <div>
-                          <span class="progress-check hide" id={`completed-check-${video.key}`}>
-                            <i class="material-icons">check_circle</i>
-                          </span>
-                          <span>
-                            {video.name}
-                          </span>
-                        </div>
-                        <div class="row mb-0">
-                          <div class="col s6 offset-s3">
-                            <div class="progress">
-                              <div class="determinate" id={`progress-bar-${video.key}`} style={{ width: "0%" }}></div>
+                    <div class="col s12" key={index}>
+                      <div class="styled-video-wrapper">
+                        <div class="styled-video-menu styled-video-menu-main-content full-width center-align" id={`video-menu-${video.key}`} video-bucket={video.bucket}>
+                          <div>
+                            <span class="progress-check hide" id={`completed-check-${video.key}`}>
+                              <i class="material-icons">check_circle</i>
+                            </span>
+                            <span>
+                              {video.name}
+                            </span>
+                          </div>
+                          <div class="row mb-0">
+                            <div class="col s6 offset-s3">
+                              <div class="progress">
+                                <div class="determinate" id={`progress-bar-${video.key}`} style={{ width: "0%" }}></div>
+                              </div>
                             </div>
                           </div>
                         </div>
+                        {video.breakpoints && video.breakpoints.length > 0 ?
+                          <div class="row mb-0 center-align breakpoint-wrapper-class hide">
+                            <div class="col s10 offset-s1 breakpoint-wrapper-inner" id={`breakpoint_wrapper-${video.key}`}>
+                              {video.breakpoints.map((breakpoint, index) => {
+                                return (
+                                  <div key={index} id={`breakpoint-${video.key}-${breakpoint.timestamp}`} data-timestamp={breakpoint.timestamp}>
+                                    {breakpoint.text}
+                                  </div>
+                                )
+                              })}
+                            </div>
+                          </div>
+                          :
+                          null
+                        }
                       </div>
                     </div>
                   )
@@ -47,11 +64,6 @@ function Course({ course }) {
               </div>
             </div>
             <div class="col s9 full-height" >
-              {/* <div class="mt-2" id="vid-helper-text">
-                <h6 class="grey-text text-darken-1 center-align">
-                  Select a video from the menu on the left to start watching.
-                </h6>
-              </div> */}
               <div class="center-align mt-2 hide" id="loading">
                 <div class="preloader-wrapper active">
                   <div class="spinner-layer spinner-purple-only">

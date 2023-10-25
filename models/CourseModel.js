@@ -29,7 +29,18 @@ const courseSchema = new mongoose.Schema({
     order: {
       type: Number,
       required: false
-    }
+    },
+    breakpoints: [{
+      timestamp: {
+        type: Number,
+        required: true
+      },
+      text: {
+        type: String,
+        required: true
+      }
+
+    }]
   }]
 })
 
