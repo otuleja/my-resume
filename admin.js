@@ -49,44 +49,33 @@ async function updateInMongo(config) {
 
 updateInMongo({
   id: "652a9aef22c38a714b42b7dd", video: {
-    name: "Lesson 5", key: "lesson-5.mp4", bucket: "react-class-videos", order: 5,
+    name: "Lesson 6", key: "lesson-6.mp4", bucket: "react-class-videos", order: 6,
     breakpoints: [
       {
         timestamp: 0,
         text: "Intro"
       },
       {
-        timestamp: 75,
-        text: "SPA vs non-SPA"
+        timestamp: 34,
+        text: "Typical Form Submission"
       },
 
       {
-        timestamp: 279,
-        text: "Componentize Todos"
+        timestamp: 136,
+        text: "Handling Forms in React"
+      },
+      {
+        timestamp: 466,
+        text: "State - controlled components"
       },
 
       {
-        timestamp: 460,
-        text: "Configuring React Router"
+        timestamp: 1022,
+        text: "Single state/handler"
       },
 
       {
-        timestamp: 718,
-        text: "Creating Add Component"
-      },
-
-      {
-        timestamp: 802,
-        text: "/add Route"
-      },
-
-      {
-        timestamp: 884,
-        text: "Configuring Add Component"
-      },
-
-      {
-        timestamp: 1560,
+        timestamp: (23 * 60) + 50,
         text: "Conclusion"
       },
 

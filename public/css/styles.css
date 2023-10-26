@@ -113,6 +113,14 @@ body {
   padding-bottom: 6px !important;
 }
 
+.breakpoint-wrapper-inner button {
+  border-top: 1px solid black;
+}
+
+.breakpoint-wrapper-inner>button:first-child {
+  border-top: none !important;
+}
+
 .breakpoint-past {
   /* border: 2px solid red; */
   font-weight: 700;
@@ -127,4 +135,18 @@ body {
 
 .breakpoint-future {
   /* border: 2px solid blue; */
+}
+
+.breakpoint-btn {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+.breakpoint-btn:focus {
+  background: none;
 }

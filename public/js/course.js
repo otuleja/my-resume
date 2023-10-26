@@ -6,6 +6,7 @@ let nameRowEl = null;
 let courseContentContainer = null;
 let videoContainer = null;
 let videoMenuElements = null;
+let breakpointButtons = null
 // let vidHelperText = null;
 let loadingElement = null
 
@@ -93,6 +94,7 @@ function init() {
   courseContentContainer = document.getElementById("course-content-container");
   videoContainer = document.getElementById("video-container");
   videoMenuElements = document.querySelectorAll(".styled-video-menu");
+  breakpointButtons = document.querySelectorAll(".breakpoint-btn")
   // vidHelperText = document.getElementById("vid-helper-text");
   loadingElement = document.getElementById("loading")
 
@@ -110,7 +112,17 @@ function init() {
   addProgressToVideos()
 }
 
+function handleBreakpointClick(e) {
+  let timestamp = e.currentTarget.dataset.timestamp
+  timestamp = parseInt(timestamp)
+  console.log(timestamp)
+  //force video to play
 
+  if (currentVideoJSPlayer) {
+    currentVideoJSPlayer.currentTime(timestamp)
+    processBreakpoints(timestamp + 1)
+  }
+}
 function setCourseContentContainer(containerHeight) {
   const targetHeight = containerHeight - nameRowEl.clientHeight;
   courseContentContainer.style.height = `${targetHeight}px`;
@@ -132,6 +144,11 @@ function setVideoMenuListeners() {
       handleMenuClick(e)
     })
   })
+  breakpointButtons.forEach(element => {
+    element.addEventListener("click", (e) => {
+      handleBreakpointClick(e)
+    })
+  })
 }
 function clearBreakpointView() {
   const elements = document.querySelectorAll(".breakpoint-wrapper-class") || []
@@ -147,14 +164,12 @@ function clearBreakpointView() {
     }
   }
   const selectedBreakpointInnerWrapper = document.getElementById(`breakpoint_wrapper-${vidKey}`)
-  console.log("selectedBreakpointInnerWrapper", selectedBreakpointInnerWrapper)
   if (selectedBreakpointInnerWrapper) {
     selectedBreakpointInnerWrapper.classList.remove("zero-height")
     selectedBreakpointInnerWrapper.parentElement.classList.remove("hide")
     const targetHeight = selectedBreakpointInnerWrapper.scrollHeight;
     selectedBreakpointInnerWrapper.parentElement.style.height = `${targetHeight}px`
     setTimeout(() => {
-      console.log("in set timeout")
       selectedBreakpointInnerWrapper.parentElement.style.height = `fit-content`
     }, 510)
   }

@@ -42,8 +42,6 @@ app.get("/course/:id", async function (req, res) {
   Course.findById(req.params.id).then(function (course) {
     course.videos = course.videos || []
     course.videos = course.videos.sort((a, b) => a.order - b.order)
-    console.log("course", course.videos[4].breakpoints)
-    console.log("aaaa", course.videos[4].id)
     res.render('course', { course });
   })
 

@@ -47,9 +47,9 @@ function Course({ course }) {
                             <div class="col s10 offset-s1 breakpoint-wrapper-inner" id={`breakpoint_wrapper-${video.key}`}>
                               {video.breakpoints.map((breakpoint, index) => {
                                 return (
-                                  <div key={index} id={`breakpoint-${video.key}-${breakpoint.timestamp}`} data-timestamp={breakpoint.timestamp}>
+                                  <button key={index} id={`breakpoint-${video.key}-${breakpoint.timestamp}`} data-timestamp={breakpoint.timestamp} className="breakpoint-btn">
                                     {breakpoint.text}
-                                  </div>
+                                  </button>
                                 )
                               })}
                             </div>
