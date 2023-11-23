@@ -49,39 +49,39 @@ async function updateInMongo(config) {
 
 updateInMongo({
   id: "652a9aef22c38a714b42b7dd", video: {
-    name: "Lesson 6", key: "lesson-6.mp4", bucket: "react-class-videos", order: 6,
+    name: "Lesson 10", key: "lesson-10.mp4", bucket: "react-class-videos", order: 10,
     breakpoints: [
       {
         timestamp: 0,
         text: "Intro"
       },
       {
-        timestamp: 34,
-        text: "Typical Form Submission"
-      },
-
-      {
-        timestamp: 136,
-        text: "Handling Forms in React"
+        timestamp: 47,
+        text: "Fetching todos from firebase"
       },
       {
-        timestamp: 466,
-        text: "State - controlled components"
+        timestamp: (5 * 60) + 7,
+        text: "Fetching data as array?"
       },
-
       {
-        timestamp: 1022,
-        text: "Single state/handler"
+        timestamp: (6 * 60) + 41,
+        text: "Storing todos in state"
       },
-
       {
-        timestamp: (23 * 60) + 50,
+        timestamp: (12 * 60) + 41,
+        text: "Convert to array"
+      },
+      // {
+      //   timestamp: (13 * 60) + 22,
+      //   text: "Disable button"
+      // },
+      {
+        timestamp: (18 * 60) + 35,
         text: "Conclusion"
-      },
-
+      }
     ]
-
-
-
   }
 })
+
+
+

@@ -14,7 +14,7 @@ function Course({ course }) {
             </div>
           </div>
           <div class="row mb-0" id="course-content-container">
-            <div class="col s3 full-height" >
+            <div class="col s3 full-height menu-wrapper" >
               <div class="row">
                 <div class="col s12">
                   <h6 class="center-align">Videos</h6>

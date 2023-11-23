@@ -125,6 +125,7 @@ function handleBreakpointClick(e) {
 }
 function setCourseContentContainer(containerHeight) {
   const targetHeight = containerHeight - nameRowEl.clientHeight;
+  console.log("targetHeight", targetHeight)
   courseContentContainer.style.height = `${targetHeight}px`;
 }
 

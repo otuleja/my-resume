@@ -31,6 +31,10 @@ app.get("/courses", async function (req, res) {
   })
 })
 
+app.get("/valuations", async function (req, res) {
+  res.render("valuations")
+})
+
 
 app.get("/course/:id", async function (req, res) {
   console.log("req.params", req.params)
