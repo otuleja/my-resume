@@ -23,7 +23,7 @@ function Course({ course }) {
               <div class="row mb-0 menu-container">
                 {course.videos.map((video, index) => {
                   return (
-                    <div class="col s12" key={index}>
+                    <div class="col s12 scrollable-video-menu-parent" key={index}>
                       <div class="styled-video-wrapper">
                         <div class="styled-video-menu styled-video-menu-main-content full-width center-align" id={`video-menu-${video.key}`} video-bucket={video.bucket}>
                           <div>

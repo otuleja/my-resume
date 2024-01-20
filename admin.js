@@ -47,36 +47,51 @@ async function updateInMongo(config) {
   })
 }
 
+
+// Lesson 24
+// 0:00 Intro
+// 0:28 Change to category logic
+// 2:13 modify card component?
+// 04:12 ish add overdue logic
+// 07:44 Overdue component
+// 12:26 Add tooltip
+// 16:23  filter by overdue
+// 19:00 Conclusion
+
 updateInMongo({
   id: "652a9aef22c38a714b42b7dd", video: {
-    name: "Lesson 10", key: "lesson-10.mp4", bucket: "react-class-videos", order: 10,
+    name: "Lesson 24", key: "lesson-24.mp4", bucket: "react-class-videos", order: 24,
     breakpoints: [
       {
         timestamp: 0,
         text: "Intro"
       },
       {
-        timestamp: 47,
-        text: "Fetching todos from firebase"
+        timestamp: 28,
+        text: "Change to category logic"
       },
       {
-        timestamp: (5 * 60) + 7,
-        text: "Fetching data as array?"
+        timestamp: (2 * 60) + 13,
+        text: "Modify card component?"
       },
       {
-        timestamp: (6 * 60) + 41,
-        text: "Storing todos in state"
+        timestamp: (4 * 60) + 12,
+        text: "Add overdue logic"
       },
       {
-        timestamp: (12 * 60) + 41,
-        text: "Convert to array"
+        timestamp: (7 * 60) + 44,
+        text: "Overdue component"
       },
-      // {
-      //   timestamp: (13 * 60) + 22,
-      //   text: "Disable button"
-      // },
       {
-        timestamp: (18 * 60) + 35,
+        timestamp: (12 * 60) + 26,
+        text: "Add tooltip"
+      },
+      {
+        timestamp: (16 * 60) + 23,
+        text: "Filter by overdue"
+      },
+      {
+        timestamp: (19 * 60) + 0,
         text: "Conclusion"
       }
     ]

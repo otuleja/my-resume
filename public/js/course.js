@@ -23,7 +23,6 @@ let breakpointObject = {
   breakpoints: []
 }
 
-//MAKE breakpoints clickable to take you to that part of video
 function insertCompletedCheck(vidKey) {
   const completedCheckElement = document.getElementById(`completed-check-${vidKey}`)
   completedCheckElement.classList.remove("hide")
@@ -176,6 +175,7 @@ function clearBreakpointView() {
   }
 }
 function handleMenuClick(e, isInitialLoad = false) {
+  console.log("e", e.currentTarget, isInitialLoad)
   breakpointObject = {
     breakpointVideoKey: null,
     breakpoints: []
@@ -194,6 +194,10 @@ function handleMenuClick(e, isInitialLoad = false) {
   clearBreakpointView()
   getSignedVideoUrl(bucket, vidKey, isInitialLoad)
   initializeBreakpoints(vidKey)
+  const scollableParent = e.currentTarget.closest(".scrollable-video-menu-parent")
+  setTimeout(() => {
+    scollableParent.scrollIntoView({ behavior: "smooth", alignToTop: true })
+  }, 265)
 }
 
 
