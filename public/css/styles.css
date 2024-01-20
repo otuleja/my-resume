@@ -186,3 +186,36 @@ body {
   overflow: hidden;
   transition: max-height 0.2s ease-out;
 }
+
+#mobile-current-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #555555;
+}
+
+.mobile-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.mobile-video-button {
+  background-color: #9c27b0;
+}
+
+.mobile-video-button:hover {
+  background-color: #9c27b0;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-content-end {
+  justify-content: end;
+}
+
+@media only screen and (max-width: 600px) {
+  #active-video {
+    width: 95% !important;
+  }
+}

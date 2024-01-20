@@ -14,7 +14,18 @@ function Course({ course }) {
             </div>
           </div>
           <div class="row mb-0" id="course-content-container">
-            <div class="col s3 full-height menu-wrapper" >
+            <div class="col s12 .show-on-small">
+              <div class="row mobile-wrapper">
+                <div class="col s2">
+                  <button id="mobile-decrement-video" class="btn waves-effect mobile-video-button" disabled>&larr;</button>
+                </div>
+                <div class="col s8 center-align" id="mobile-current-title"></div>
+                <div class="col s2 flex justify-content-end">
+                  <button id="mobile-increment-video" class="btn waves-effect mobile-video-button">&rarr;</button>
+                </div>
+              </div>
+            </div>
+            <div class="col s3 full-height menu-wrapper hide-on-small-only" >
               <div class="row">
                 <div class="col s12">
                   <h6 class="center-align">Videos</h6>
@@ -30,7 +41,7 @@ function Course({ course }) {
                             <span class="progress-check hide" id={`completed-check-${video.key}`}>
                               <i class="material-icons">check_circle</i>
                             </span>
-                            <span>
+                            <span class="video-name-span">
                               {video.name}
                             </span>
                           </div>
@@ -63,7 +74,7 @@ function Course({ course }) {
                 })}
               </div>
             </div>
-            <div class="col s9 full-height" >
+            <div class="col s12 m9 full-height" >
               <div class="center-align mt-2 hide" id="loading">
                 <div class="preloader-wrapper active">
                   <div class="spinner-layer spinner-purple-only">

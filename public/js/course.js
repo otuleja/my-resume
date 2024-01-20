@@ -7,9 +7,12 @@ let courseContentContainer = null;
 let videoContainer = null;
 let videoMenuElements = null;
 let breakpointButtons = null
+let decrementButton = null;
+let incrementButton = null;
 // let vidHelperText = null;
 let loadingElement = null
-
+let mobileTitleElement = null
+let mobileCurrentVideoIndex = 0;
 let viewHeight = 0;
 let vidKey = "";
 let courseID = "";
@@ -22,6 +25,7 @@ let breakpointObject = {
   breakpointVideoKey: null,
   breakpoints: []
 }
+let lessonTitles = []
 
 function insertCompletedCheck(vidKey) {
   const completedCheckElement = document.getElementById(`completed-check-${vidKey}`)
@@ -86,6 +90,58 @@ function checkVidStatus() {
     processBreakpoints(currentTime)
   }
 }
+function changeMobileTitle(title) {
+  mobileTitleElement.innerHTML = title
+}
+
+function checkForDisabledButtons() {
+  if (mobileCurrentVideoIndex === 0) {
+    decrementButton.disabled = true
+  } else {
+    decrementButton.disabled = false
+  }
+  if (mobileCurrentVideoIndex === lessonTitles.length - 1) {
+    incrementButton.disabled = true
+  } else {
+    incrementButton.disabled = false
+  }
+
+}
+function handleMobileButtonClick(amount) {
+  mobileCurrentVideoIndex = mobileCurrentVideoIndex + amount
+  const currentTitleObject = lessonTitles[mobileCurrentVideoIndex]
+  console.log("currentTitleObject", currentTitleObject)
+  clearVidContent()
+  getSignedVideoUrl(currentTitleObject.bucket, currentTitleObject.key)
+  changeMobileTitle(currentTitleObject.title)
+  checkForDisabledButtons()
+}
+function setMobileButtonListener() {
+  decrementButton = document.getElementById("mobile-decrement-video")
+  incrementButton = document.getElementById("mobile-increment-video")
+  decrementButton.addEventListener("click", (e) => {
+    handleMobileButtonClick(-1)
+  })
+  incrementButton.addEventListener("click", (e) => {
+    handleMobileButtonClick(1)
+  })
+  checkForDisabledButtons()
+}
+function hanldeVideoMenuElements() {
+  videoMenuElements.forEach((element, index) => {
+    // console.log("element", element)
+    let id = element.id;
+    id = id.split("video-menu-")[1]
+    const titleElement = element.getElementsByClassName("video-name-span")[0];
+    const title = titleElement.innerHTML
+    const videoBucket = element.getAttribute("video-bucket")
+    if (index === 0) {
+      changeMobileTitle(title)
+    }
+    lessonTitles.push({ title, key: id, bucket: videoBucket })
+  })
+
+}
 function init() {
   headerEl = document.getElementById("header");
   courseContainer = document.getElementById("course-container");
@@ -96,6 +152,7 @@ function init() {
   breakpointButtons = document.querySelectorAll(".breakpoint-btn")
   // vidHelperText = document.getElementById("vid-helper-text");
   loadingElement = document.getElementById("loading")
+  mobileTitleElement = document.getElementById("mobile-current-title")
 
   viewHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
   courseID = window.location.pathname.split("/")[2]
@@ -106,8 +163,10 @@ function init() {
 
   //default to first video being active by simulating click
   handleMenuClick({ currentTarget: videoMenuElements[0] }, true)
+  hanldeVideoMenuElements()
   setCourseContentContainer(containerHeight)
   setVideoMenuListeners()
+  setMobileButtonListener()
   addProgressToVideos()
 }
 
