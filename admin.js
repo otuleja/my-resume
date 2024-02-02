@@ -48,50 +48,49 @@ async function updateInMongo(config) {
 }
 
 
-// Lesson 24
+// Lesson 25
 // 0:00 Intro
-// 0:28 Change to category logic
-// 2:13 modify card component?
-// 04:12 ish add overdue logic
-// 07:44 Overdue component
-// 12:26 Add tooltip
-// 16:23  filter by overdue
-// 19:00 Conclusion
+// 1:22 Loading component
+// 2:51 Modifying state in EditTodo
+// 7:54 fetch todo from db
+// 10:59Handle  handle bad todoId
+// 15:19 Loading state on home page
+// 18:48 Conclusion
 
 updateInMongo({
   id: "652a9aef22c38a714b42b7dd", video: {
-    name: "Lesson 24", key: "lesson-24.mp4", bucket: "react-class-videos", order: 24,
+    name: "Lesson 25", key: "lesson-25.mp4", bucket: "react-class-videos", order: 25,
     breakpoints: [
       {
         timestamp: 0,
         text: "Intro"
       },
       {
-        timestamp: 28,
-        text: "Change to category logic"
+        timestamp: 82,
+        text: "Loading component"
       },
       {
-        timestamp: (2 * 60) + 13,
-        text: "Modify card component?"
+        timestamp: (2 * 60) + 51,
+        text: "Modifying state in EditTodo"
       },
       {
-        timestamp: (4 * 60) + 12,
-        text: "Add overdue logic"
+        timestamp: (7 * 60) + 54,
+        text: "Fetch todo from db"
       },
       {
-        timestamp: (7 * 60) + 44,
-        text: "Overdue component"
+        timestamp: (10 * 60) + 59,
+        text: "Handle bad todoId"
       },
       {
-        timestamp: (12 * 60) + 26,
-        text: "Add tooltip"
+        timestamp: (15 * 60) + 19,
+        text: "Loading state on home page"
       },
+      // {
+      //   timestamp: (16 * 60) + 23,
+      //   text: "Filter by overdue"
+      // },
       {
-        timestamp: (16 * 60) + 23,
-        text: "Filter by overdue"
-      },
-      {
-        timestamp: (19 * 60) + 0,
+        timestamp: (18 * 60) + 48,
         text: "Conclusion"
       }
     ]

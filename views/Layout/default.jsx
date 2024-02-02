@@ -16,13 +16,13 @@ function DefaultLayout({ title, component, children }) {
         <header id="header">
           <nav>
             <div class="nav-wrapper purple">
-              <a href="#!" class="brand-logo">Logo</a>
+              {/* <a href="#!" class="brand-logo">Logo</a> */}
               <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
               <ul class="right hide-on-med-and-down">
                 <li><a href="/">Home</a></li>
                 <li><a href="/courses">Courses</a></li>
                 <li><a href="/valuations">Valuations</a></li>
-
+                <li><a href="/about">Valuations</a></li>
               </ul>
             </div>
           </nav>
@@ -30,6 +30,7 @@ function DefaultLayout({ title, component, children }) {
             <li><a href="/">Home</a></li>
             <li><a href="/courses">Courses</a></li>
             <li><a href="/valuations">Valuations</a></li>
+            <li><a href="/about">Valuations</a></li>
           </ul>
         </header>
         <main>

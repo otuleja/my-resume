@@ -18,7 +18,7 @@ function Courses(props) {
                     <p>{course.description}</p>
                   </div>
                   <div class="card-action">
-                    <a href={`/course/${course.id}`}>View this course</a>
+                    <a href={`/course/${course.id}`} class="no-margin">View this course</a>
                   </div>
                 </div>
               </div>

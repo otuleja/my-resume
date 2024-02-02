@@ -14,7 +14,7 @@ function Course({ course }) {
             </div>
           </div>
           <div class="row mb-0" id="course-content-container">
-            <div class="col s12 .show-on-small">
+            <div class="col s12 show-on-small hide-on-med-and-up">
               <div class="row mobile-wrapper">
                 <div class="col s2">
                   <button id="mobile-decrement-video" class="btn waves-effect mobile-video-button" disabled>&larr;</button>

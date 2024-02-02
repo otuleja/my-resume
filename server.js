@@ -22,7 +22,7 @@ app.get("/health", async function (req, res) {
 })
 
 app.get("/", async function (req, res) {
-  res.render('index', { name: 'Johnnnn' });
+  res.render('index', {});
 })
 
 app.get("/courses", async function (req, res) {
@@ -33,6 +33,10 @@ app.get("/courses", async function (req, res) {
 
 app.get("/valuations", async function (req, res) {
   res.render("valuations")
+})
+
+app.get("/about", async function (req, res) {
+  res.render("about")
 })
 
 
