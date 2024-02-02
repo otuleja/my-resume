@@ -30,7 +30,7 @@ function DefaultLayout({ title, component, children }) {
             <li><a href="/">Home</a></li>
             <li><a href="/courses">Courses</a></li>
             <li><a href="/valuations">Valuations</a></li>
-            <li><a href="/about">Valuations</a></li>
+            <li><a href="/about">About</a></li>
           </ul>
         </header>
         <main>
