@@ -7,7 +7,7 @@ function About(props) {
       <div class="container mt-4" >
         <div class="row">
           <div class="col s12">
-            View <a href="https://d2ibgugwied9oi.cloudfront.net/Owen_Tuleja_resume.pdf"
+            View <a href="https://d1eagk8n8oi8q1.cloudfront.net/resume.pdf"
               target="_blank"
             >my resume</a>
           </div>

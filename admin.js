@@ -25,7 +25,7 @@ async function pushToMongo(config) {
 
 }
 
-// pushToMongo({ data: { name: "React" } })
+// pushToMongo({ data: { name: "JavaScript Array Methods" } })
 
 async function updateInMongo(config) {
   mongoose.set('strictQuery', true)
@@ -47,50 +47,48 @@ async function updateInMongo(config) {
   })
 }
 
-
-// Lesson 25
-// 0:00 Intro
-// 1:22 Loading component
-// 2:51 Modifying state in EditTodo
-// 7:54 fetch todo from db
-// 10:59Handle  handle bad todoId
-// 15:19 Loading state on home page
-// 18:48 Conclusion
+// // Lesson 35
+// // Intro
+// // 0:23 install firebase cli
+// // 2:14 initialize hosting
+// // 4:38 first deploy and troubleshooting
+// // 7:54 second deploy - success!
+// // 9:18 Final thoughts
 
 updateInMongo({
-  id: "652a9aef22c38a714b42b7dd", video: {
-    name: "Lesson 25", key: "lesson-25.mp4", bucket: "react-class-videos", order: 25,
+  id: "663def7cbfcb284fddb6f08b", video: {
+    name: "Lesson 1 - forEach()", key: "for-each.mp4", bucket: "js-array-class", order: 1,
     breakpoints: [
       {
         timestamp: 0,
         text: "Intro"
       },
       {
-        timestamp: 82,
-        text: "Loading component"
+        timestamp: (0 * 60) + 32,
+        text: "for loop"
       },
       {
-        timestamp: (2 * 60) + 51,
-        text: "Modifying state in EditTodo"
+        timestamp: (5 * 60) + 42,
+        text: "forEach"
       },
       {
-        timestamp: (7 * 60) + 54,
-        text: "Fetch todo from db"
-      },
-      {
-        timestamp: (10 * 60) + 59,
-        text: "Handle bad todoId"
-      },
-      {
-        timestamp: (15 * 60) + 19,
-        text: "Loading state on home page"
+        timestamp: (9 * 60) + 10,
+        text: "Inline callback"
       },
       // {
-      //   timestamp: (16 * 60) + 23,
-      //   text: "Filter by overdue"
+      //   timestamp: (7 * 60) + 54,
+      //   text: "Second deploy - success!"
+      // },
+      // {
+      //   timestamp: (21 * 60) + 5,
+      //   text: "Sign up user"
+      // },
+      // {
+      //   timestamp: (25 * 60) + 26,
+      //   text: "Redirect component"
       // },
       {
-        timestamp: (18 * 60) + 48,
+        timestamp: (11 * 60) + 6,
         text: "Conclusion"
       }
     ]

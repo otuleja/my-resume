@@ -8,10 +8,10 @@ function Courses(props) {
         <div class="row center-align">
           {props.courses.map(course => {
             return (
-              <div class="col s10 offset-s1 m8 offset-m2 l6 offset-l3" >
+              <div class="col s10 offset-s1 m8 offset-m2 l4 offset-l1" >
                 <div class="card z-depth-5">
                   <div class="card-image">
-                    <img src="images/react-1.png" />
+                    <img src={`images/${course.image}`} />
                     <span class="card-title">{course.name}</span>
                   </div>
                   <div class="card-content">
