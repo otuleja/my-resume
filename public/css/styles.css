@@ -253,8 +253,21 @@ body {
 
 .space-between {
   justify-content: space-between;
+}
+
+.card-title {
+  width: 100%;
+  font-weight: 600 !important;
+  /* color: #9c27b0 !important; */
 
 }
+
+.text-shadow {
+  color: white;
+  font-size: 24px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
 
 @media only screen and (max-width: 600px) {
   #active-video {

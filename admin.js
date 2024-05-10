@@ -57,28 +57,28 @@ async function updateInMongo(config) {
 
 updateInMongo({
   id: "663def7cbfcb284fddb6f08b", video: {
-    name: "Lesson 1 - forEach()", key: "for-each.mp4", bucket: "js-array-class", order: 1,
+    name: "Lesson 3 - filter()", key: "filter.mp4", bucket: "js-array-class", order: 1,
     breakpoints: [
       {
         timestamp: 0,
         text: "Intro"
       },
       {
-        timestamp: (0 * 60) + 32,
-        text: "for loop"
+        timestamp: (1 * 60) + 28,
+        text: "Filtering with for loop"
       },
       {
-        timestamp: (5 * 60) + 42,
-        text: "forEach"
+        timestamp: (5 * 60) + 0,
+        text: "JS array method"
       },
       {
-        timestamp: (9 * 60) + 10,
-        text: "Inline callback"
+        timestamp: (8 * 60) + 14,
+        text: "Alternative return statements"
       },
-      // {
-      //   timestamp: (7 * 60) + 54,
-      //   text: "Second deploy - success!"
-      // },
+      {
+        timestamp: (10 * 60) + 54,
+        text: "Accessing index"
+      },
       // {
       //   timestamp: (21 * 60) + 5,
       //   text: "Sign up user"
@@ -88,7 +88,7 @@ updateInMongo({
       //   text: "Redirect component"
       // },
       {
-        timestamp: (11 * 60) + 6,
+        timestamp: (13 * 60) + 15,
         text: "Conclusion"
       }
     ]

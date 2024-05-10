@@ -12,7 +12,7 @@ function Courses(props) {
                 <div class="card z-depth-5">
                   <div class="card-image">
                     <img src={`images/${course.image}`} />
-                    <span class="card-title">{course.name}</span>
+                    <span class="card-title text-shadow">{course.name}</span>
                   </div>
                   <div class="card-content">
                     <p>{course.description}</p>
